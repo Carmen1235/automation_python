@@ -1,0 +1,11 @@
+方法1、永久生效
+
+wmic ENVIRONMENT create name="【变量名】",username="<system>",VariableValue="【变量值】"
+
+方法2、永久生效
+
+setx path "%path%;【新路径】"
+
+方法3、仅本次生效
+
+set path=%path%;【新路径】
