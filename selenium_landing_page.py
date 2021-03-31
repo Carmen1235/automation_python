@@ -49,16 +49,16 @@ browser.find_element_by_link_text("Landing Pages").click()
 
 #添加landing page的方法动作和传值
 def by_value(storeid,title,link,stock,top_image_file,description):
-    browser.implicitly_wait(120)
-    browser.find_element_by_css_selector("button.scalable:first-child").click()  # 选择class是scalable的第一个参数
+    browser.implicitly_wait(60)
+    browser.find_element_by_xpath('//*[@id="page:main-container"]/div[2]/table/tbody/tr/td[2]/button[@title="Add Landingpage"]').click()  # 选择class是scalable的第一个参数
     #通过id然后找到option的value只然后选定国家，这是下拉框的选项select_by_value(“选择值”)select_by_index(“索引值”)select_by_visible_text(“文本值”)
     store_id = browser.find_element_by_id("store_id")
     Select(store_id).select_by_visible_text(storeid)
     browser.find_element_by_id("title").send_keys(title) # 根据表格的数据像title传值
     browser.find_element_by_id("url").send_keys(link)
     browser.find_element_by_id("weight").send_keys("10")
-    browser.find_element_by_id("date_from").send_keys("2021-02-24 07:28:33")
-    browser.find_element_by_id("date_to").send_keys("2021-12-31 07:28:33")
+    browser.find_element_by_id("date_from").send_keys("2021-03-23 01:28:33")
+    browser.find_element_by_id("date_to").send_keys("2031-12-31 07:28:33")
     #定位上传文件按钮，添加本地文件
     browser.find_element_by_id("top_image_file").send_keys(top_image_file)
     browser.find_element_by_id("query").send_keys(stock)
@@ -102,7 +102,7 @@ def obtain_table_data(url):
         all_case_info.append(case_info)  # 注意，python以对齐来确定循环的所定义区域
     return all_case_info
 
-data_table = obtain_table_data("C:\\Users\\Mara.Shu\\Desktop\\7. Mother's day general.xlsx")
+data_table = obtain_table_data("C:\\Users\\Mara.Shu\\Desktop\\7. Home office.xlsx")
 
 #传入文件数据，添加landing page
 for num in range(0,len(data_table)):
@@ -111,11 +111,11 @@ for num in range(0,len(data_table)):
 browser.implicitly_wait(50)
 
 #传输id到excel里面
-rule = r'id/(.*?)/'
-for num in range(0,len(data_table)):
-    by_id(data_table[num][1],data_table[num][3])
-    id_data = re.findall(rule, browser.current_url) #用正则的方法取出其中的id，正则表达式之后的数据显示的是一个数组，所以需要提取第一个数据
-    we = Write_excel("C:\\Users\\Mara.Shu\\Desktop\\7. Mother's day general.xlsx")
-    we.write(num+2,8,id_data[0])
-    browser.find_element_by_css_selector("button.back:first-child").click()
-    browser.implicitly_wait(50)
+# rule = r'id/(.*?)/'
+# for num in range(0,len(data_table)):
+#     by_id(data_table[num][1],data_table[num][3])
+#     id_data = re.findall(rule, browser.current_url) #用正则的方法取出其中的id，正则表达式之后的数据显示的是一个数组，所以需要提取第一个数据
+#     we = Write_excel("C:\\Users\\Mara.Shu\\Desktop\\4. Head - Rattan outdoor funriture.xlsx")
+#     we.write(num+2,8,id_data[0])
+#     browser.find_element_by_css_selector("button.back:first-child").click()
+#     browser.implicitly_wait(50)
